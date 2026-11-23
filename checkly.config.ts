@@ -15,13 +15,13 @@ export default defineConfig({
     // so local runs match Checkly. List runtimes with: npx checkly runtimes
     runtimeId: '2026.04',
     frequency: Frequency.EVERY_30M,
-    locations: ['us-east-1', 'eu-west-1'],
+    // Both locations are available on every Checkly plan.
+    locations: ['us-east-1', 'eu-central-1'],
     tags: ['cli'],
   },
   cli: {
-    // Where `npx checkly test` runs. EU, because the shop site shows its
-    // consent dialog there, so a test run covers the harder path.
-    runLocation: 'eu-west-1',
+    // Where `npx checkly test` runs unless you pass --location.
+    runLocation: 'eu-central-1',
     reporters: ['list'],
   },
 })

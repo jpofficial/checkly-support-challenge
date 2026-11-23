@@ -9,7 +9,7 @@ export const userApiGroup = new CheckGroupV2('user-api-checks', {
   name: 'User API checks',
   activated: true,
   frequency: Frequency.EVERY_10M,
-  locations: ['us-east-1', 'eu-west-1'],
+  locations: ['us-east-1', 'eu-central-1'],
   tags: ['api'],
   alertChannels: [emailChannel],
   // Same alerting and retry rules as the Playwright group.

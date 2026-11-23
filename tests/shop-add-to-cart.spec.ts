@@ -7,8 +7,8 @@ const pageLoad = (page: Page, path: string) =>
 
 test('add a product to the cart and reach signup', async ({ page }) => {
   // The site shows a consent dialog to EU visitors, and it can appear late.
-  // A locator handler clicks it whenever it shows up, instead of checking once
-  // at the start and racing it.
+  // Blocking ads below also stops it in our runs, so this handler is a safety
+  // net. It clicks the dialog if it ever shows up, at any point in the test.
   const consentButton = page.getByRole('button', { name: 'Consent', exact: true })
   await page.addLocatorHandler(consentButton, async () => {
     await consentButton.click()

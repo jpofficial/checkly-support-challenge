@@ -107,7 +107,8 @@ two groups.
 | Playwright checks | One per test file in `tests/` | 30 minutes | `tests/playwright-group.check.ts` |
 | User API checks | One per entry in `users.json` | 10 minutes | `src/api-checks/users.check.ts` |
 
-Each run happens in one of two regions, `us-east-1` or `eu-west-1`, taking turns.
+Each run happens in one of two regions, `us-east-1` (N. Virginia) or
+`eu-central-1` (Frankfurt), taking turns. Both are available on every plan.
 A failed run is retried once, 30 seconds later, in the same region. If it fails
 again, Checkly emails `raccoon@checklyhq.com`, and emails again when the check
 recovers. To change the address, edit `src/alert-channels.ts` and deploy.
@@ -212,7 +213,7 @@ it can be reused from any other check file.
 |---|---|
 | `Continue Shopping` is a button, so the `link` locator waited for something that never appeared | `getByRole('button', ...)` |
 | The checkout dialog link reads `Register / Login`, not `Register / Signup` | Use the real name |
-| `expect(x).toBeVisible;` has no `()` and no `await`. It checks nothing, and Playwright raises no error, so it is easy to miss | `await expect(x).toBeVisible()` |
+| Three `expect(x).toBeVisible;` lines have no `()` and no `await`. They check nothing, and Playwright raises no error, so it is easy to miss | `await expect(x).toBeVisible()` |
 | The site often shows a full page ad that covers the page and blocks clicks | Block requests to ad networks. Ads are not what the test is about |
 | `isVisible()` checks the consent dialog once and does not wait for it | `page.addLocatorHandler`, which clicks it whenever it appears |
 | A click could land before the page's scripts were ready and do nothing | Wait for each page's URL before clicking on it |
@@ -242,8 +243,8 @@ chat displayed them. If they are in your source, remove them.
   `npx checkly env update USER_API_TOKEN --secret`.
 - **Checks you made in the Checkly UI.** A deploy does not touch them, so they
   stay next to the new ones. Delete the old two once these pass.
-- **Your plan.** At these schedules the project uses roughly 17,300 API runs
-  and 1,500 browser runs a month, before retries. That fits the Starter plan.
+- **Your plan.** At these schedules the project uses 17,280 API runs and 1,440
+  browser runs a month, before retries. That fits the Starter plan.
   The free Hobby plan allows fewer, and Checkly stops running checks once a
   month's runs are used up. Each request in a multistep
   check counts as an API run. Compare that with your plan's limits on the

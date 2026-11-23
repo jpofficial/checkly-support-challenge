@@ -16,7 +16,7 @@ export const playwrightGroup = new CheckGroupV2('playwright-checks', {
   name: 'Playwright checks',
   activated: true,
   frequency: Frequency.EVERY_30M,
-  locations: ['us-east-1', 'eu-west-1'],
+  locations: ['us-east-1', 'eu-central-1'],
   tags: ['playwright'],
   alertChannels: [emailChannel],
   // Needed next to alertChannels. Without a policy on the group, Checkly uses
