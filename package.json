@@ -1,0 +1,23 @@
+{
+  "name": "raccoon-synthetics",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Synthetic monitoring as code, deployed with the Checkly CLI",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "pretest": "tsc --noEmit",
+    "test": "checkly test --retries 1",
+    "test:local": "playwright test",
+    "typecheck": "tsc --noEmit",
+    "predeploy": "tsc --noEmit",
+    "deploy:preview": "checkly deploy --preview",
+    "deploy": "checkly deploy"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.58.2",
+    "checkly": "^10.2.0",
+    "typescript": "^7.0.2"
+  }
+}
